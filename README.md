@@ -94,7 +94,8 @@ latest_version:\
     )
 ),
 ```
-## Maintainer
+## Contributor
 
 [Minas Chalise](https://github.com/chaliseminas)
+[Bikram koju](https://github.com/BikramKoju)
 
