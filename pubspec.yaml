@@ -1,6 +1,6 @@
 name: brightness_volume_manager
 description: "This is a brightness volume manager plugin."
-version: 1.0.0
+version: 0.0.1
 homepage: https://github.com/chaliseminas/brightness_volume_manager
 
 environment:
