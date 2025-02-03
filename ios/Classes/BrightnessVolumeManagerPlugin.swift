@@ -4,15 +4,21 @@ import MediaPlayer
 import AVFoundation
 import Darwin
 
-public class BrightnessVolumePlugin: NSObject, FlutterPlugin {
+public class BrightnessVolumeManagerPlugin: NSObject, FlutterPlugin {
     private var volumeView: MPVolumeView?
     private var musicController: MPMusicPlayerController?
 
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let channel = FlutterMethodChannel(name: "brightness_volume", binaryMessenger: registrar.messenger())
-        let instance = BrightnessVolumePlugin()
+        let channel = FlutterMethodChannel(name: "brightness_volume_manager", binaryMessenger: registrar.messenger())
+        let instance = BrightnessVolumeManagerPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
     }
+
+    private func setSystemVolume(_ volume: Float) {
+        let volumeView = MPVolumeView()
+        if let slider = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider {slider.value = volume }
+    }
+
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
@@ -47,13 +53,12 @@ public class BrightnessVolumePlugin: NSObject, FlutterPlugin {
             result(currentVol)
 
         case "setVolume":
-            if let args = call.arguments as? [String: Any], let volume = args["volume"] as? Float {
-                if musicController == nil {
-                    musicController = MPMusicPlayerController.applicationMusicPlayer
-                }
-                musicController?.volume = volume
+            if let args = call.arguments as? [String: Any],
+            let volume = args["volume"] as? Float {
+                 setSystemVolume(volume)
             }
-            result(nil)
+             result(nil)
+
         default:
             result(FlutterMethodNotImplemented)
         }
