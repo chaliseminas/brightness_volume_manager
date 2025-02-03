@@ -1,6 +1,6 @@
 name: brightness_volume_manager
-description: "This is a brightness volume manager plugin."
-version: 0.0.1
+description: A Flutter plugin to manage screen brightness and volume on Android and iOS. Also provides the custom widget for brightness and volume swipe.
+version: 0.0.2
 homepage: https://github.com/chaliseminas/brightness_volume_manager
 
 environment:
